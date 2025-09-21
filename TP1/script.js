@@ -29,6 +29,7 @@ const user_age = user.age
 console.log("Méthode 1: ", user_name, user_age)
 const { name , age } = user
 console.log("Méthode 2: ", name, age)
+console.log("Méthode 3: ", user["name"], user["age"])
 
 //Ex 4
 const arr1 = [1, 2, 3];

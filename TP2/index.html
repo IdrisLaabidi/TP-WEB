@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>  
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script src="script.js" defer></script>
+    <title>TP2</title>
+</head>
+<body>
+    <nav class="navbar bg-primary text-light-emphasis">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Todo</a>
+            <i class="bi bi-sun-fill" id="theme-icon" onclick="toggleTheme()"></i>
+        </div>
+    </nav>
+    <section>
+        <div class="container-md bg-body-tertiary p-3 my-3 rounded">
+            <form onsubmit="addTask(event)">
+                <div class="mb-3">
+                    <label for="taskInput" class="form-label">Add a task</label>
+                    <input type="text" class="form-control" id="taskInput" name="task" placeholder="Buy milk" required>
+                </div>
+
+                <div class="d-flex gap-3 mb-3">
+                    <div class="flex-fill">
+                        <label for="prioritySelect" class="form-label">Priority</label>
+                        <select class="form-select" id="prioritySelect" name="priority" required>
+                            <option value="" selected disabled>Select Priority</option>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                    <div class="flex-fill">
+                        <label for="dueDate" class="form-label">Due Date</label>
+                        <input type="date" class="form-control" id="dueDate" name="dueDate">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary mb-3">Add</button>
+            </form>
+
+            <hr class="my-2">
+            <div class="card">
+                <ul id="task-list" class="list-group list-group-flush">
+                    <!-- Tasks will be added here dynamically -->
+                </ul>
+            </div>
+        </div>
+
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
