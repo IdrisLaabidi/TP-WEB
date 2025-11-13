@@ -1,0 +1,21 @@
+:host{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}/* You can add global styles to this file, and also import other style files */
+
+.input-field{
+  display: flex;
+  gap: 1rem;
+  border: 1px solid black;
+  padding: 5px;
+  margin: 5px 0;
+  width: fit-content;
+  align-items: center;
+}
+
+button{
+  color: rgb(255, 255, 255);
+  background: linear-gradient(rgb(40, 15, 232) 0%, rgb(201, 16, 238) 100%);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: large;
+}

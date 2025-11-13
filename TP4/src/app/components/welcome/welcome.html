@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>Welcome {{username}}</h1>
+
+  <img [src]="imagePath" alt="Test image" width="100px" height="100px"/>
+
+  <button (click)="onClick()" style="max-width: 150px;">Dire Bonjour</button>
+
+  <div class="input-field">
+    <label for="username">Username: </label>
+    <input style="font-size: large;" id="username" type="text" [(ngModel)]="username" />
+  </div>
+</div>
+

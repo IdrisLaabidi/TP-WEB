@@ -1,0 +1,16 @@
+.en-stock {
+  background-color: rgb(163, 190, 163);
+}
+
+.hors-stock {
+  background-color: rgb(213, 150, 155);
+}
+
+.produit{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+}

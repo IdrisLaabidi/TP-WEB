@@ -1,0 +1,10 @@
+<div class="produit" [class]="enStock ? 'en-stock' : 'hors-stock'">
+  <div style="display: flex; gap: 1rem; justify-content: center;">
+    <img [src]="imageUrl" alt="image"/>
+    <p>{{nomProduit}} -- {{prix | currency}}</p>
+  </div>
+  <div style="display: flex; gap: 1rem; justify-content: center;">
+    <button (click)="afficherAlerte()">Ajouter au panier</button>
+    <button (click)="enStock = !enStock">manipuler valeur de stock</button>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<app-utilisateur></app-utilisateur>
+<app-produit
+(ajouterAuPanier)="handlePanier($event)"
+*ngFor="let produit of produits"
+[nomProduit]="produit"
+></app-produit>
+<p>Le panier contient {{panier.length}} produits:</p>
+<ul>
+<li *ngFor="let item of panier">{{item}}</li>
+</ul>
