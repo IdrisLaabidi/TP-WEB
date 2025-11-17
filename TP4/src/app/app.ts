@@ -2,10 +2,11 @@ import { Component, signal } from '@angular/core';
 import { Produit } from "./components/produit/produit";
 import { Utilisateur } from './components/utilisateur/utilisateur';
 import { NgFor } from '@angular/common';
+import { FormulaireInscription } from "./components/formulaire-inscription/formulaire-inscription";
 
 @Component({
   selector: 'app-root',
-  imports: [Produit, Utilisateur, NgFor],
+  imports: [FormulaireInscription],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
