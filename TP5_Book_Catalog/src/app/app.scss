@@ -1,0 +1,14 @@
+.ng-invalid.ng-dirty {
+  border-left: 5px solid red;
+}
+
+
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 8px; border-bottom: 1px solid #ccc; text-align: left; }
+.actions button { margin-right: 6px; }
+
+
+.container { max-width: 900px; margin: 24px auto; padding: 12px; }
+.header { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.search-input { margin-right: 8px; }
+.counter { font-weight:600; }
