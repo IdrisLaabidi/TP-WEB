@@ -7,35 +7,59 @@ import {Book} from '../../models/book.model';
 
 @Component({
   selector: 'book-container',
-  standalone: true,
   imports: [CommonModule, FormsModule, BookList, BookForm],
   template: `
-  <div class="container">
-    <div class="header">
-      <h1>Gestion des livres</h1>
-      <div>
-        <input class="search-input" placeholder="Recherche par titre/auteur" [(ngModel)]="query" />
-        <select [(ngModel)]="sortBy">
-          <option value="">-- Trier --</option>
-          <option value="category">Catégorie</option>
-          <option value="available">Disponibilité</option>
-        </select>
-        <span class="counter">Total: {{filteredBooks.length}}</span>
+    <div class="container py-4">
+
+      <!-- HEADER -->
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+
+          <div class="d-flex justify-content-between align-items-center flex-wrap">
+            <h2 class="mb-3 mb-md-0">📚 Gestion des livres</h2>
+
+            <div class="d-flex gap-2 align-items-center flex-wrap">
+              <input
+                class="form-control"
+                style="min-width: 220px"
+                placeholder="Recherche..."
+                [(ngModel)]="searchText"
+              />
+
+              <select class="form-select" [(ngModel)]="sortBy" style="min-width: 160px">
+                <option value="">-- Trier --</option>
+                <option value="category">Catégorie</option>
+                <option value="availability">Disponibilité</option>
+              </select>
+
+              <span class="badge bg-primary fs-6">Total : {{ filteredBooks.length }}</span>
+            </div>
+          </div>
+
+        </div>
       </div>
+
+      <!-- FORMULAIRE -->
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <book-form
+            [categories]="categories"
+            [editBook]="editingBook"
+            (create)="addBook($event)"
+            (update)="updateBook($event)"
+            (cancel)="cancelEdit()"
+          ></book-form>
+        </div>
+      </div>
+
+      <!-- LISTE -->
+      <book-list
+        [books]="filteredBooks"
+        (edit)="startEdit($event)"
+        (delete)="deleteBook($event)"
+      ></book-list>
+
     </div>
-
-    <book-form
-      [categories]="categories"
-      [editBook]="editingBook"
-      (create)="addBook($event)"
-      (update)="updateBook($event)"
-      (cancel)="cancelEdit()"
-    ></book-form>
-
-    <hr />
-
-    <book-list [books]="filteredBooks" (edit)="startEdit($event)" (delete)="deleteBook($event)"></book-list>
-  </div>
   `
 })
 export class BookContainerComponent {
@@ -69,29 +93,16 @@ export class BookContainerComponent {
   searchText = '';
   sortBy: 'category' | 'availability' | '' = '';
 
+  editingBook: Book | null = null;
+
   private nextId(): number {
     return this.books.length ? Math.max(...this.books.map(b => b.id)) + 1 : 1;
   }
 
-
-
-  // Form state
-  selectedBook: Book | null = null;
-  isEditMode = false;
-
-  // filtrage / tri utils
-  protected editingBook: Book = {
-    author: '',
-    category: '',
-    id: 0,
-    isAvailable: false,
-    publisherEmail: '',
-    releaseDate: '',
-    title: ''
-  };
-  protected query: any;
+  // --- FILTRAGE + TRI ---
   get filteredBooks(): Book[] {
-    let list = this.books.slice();
+    let list = [...this.books];
+
     if (this.searchText) {
       const q = this.searchText.toLowerCase();
       list = list.filter(b =>
@@ -110,54 +121,28 @@ export class BookContainerComponent {
     return list;
   }
 
-  get totalCount(): number {
-    return this.books.length;
+  // --- CRUD LOGIC ---
+  startEdit(book: Book) {
+    this.editingBook = { ...book };
   }
 
-  onCancelEdit() {
-    this.isEditMode = false;
-    this.selectedBook = null;
-  }
-
-  protected startEdit($event: Book) {
-
-  }
-
-  protected addBook($event: Book) {
-
-  }
-
-  protected updateBook($event: Book) {
-
-  }
-
-  protected cancelEdit() {
-
-  }
-
-  protected deleteBook($event: number) {
-
-  }
-
-  onAddBook(book: Omit<Book, 'id'>) {
-    const newBook: Book = { ...book, id: this.nextId() };
+  addBook(book: Book) {
+    const newBook = { ...book, id: this.nextId() };
     this.books.push(newBook);
   }
 
-  onDeleteBook(id: number) {
+  updateBook(updated: Book) {
+    const index = this.books.findIndex(b => b.id === updated.id);
+    if (index !== -1) this.books[index] = { ...updated };
+    this.editingBook = null;
+  }
+
+  cancelEdit() {
+    this.editingBook = null;
+  }
+
+  deleteBook(id: number) {
     this.books = this.books.filter(b => b.id !== id);
-  }
-
-  onEditRequest(book: Book) {
-    this.selectedBook = { ...book };
-    this.isEditMode = true;
-  }
-
-  onUpdateBook(updated: Book) {
-    const idx = this.books.findIndex(b => b.id === updated.id);
-    if (idx !== -1) this.books[idx] = { ...updated };
-    this.isEditMode = false;
-    this.selectedBook = null;
   }
 }
 

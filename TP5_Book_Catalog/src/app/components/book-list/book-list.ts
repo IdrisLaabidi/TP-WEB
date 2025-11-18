@@ -4,34 +4,58 @@ import { Book } from '../../models/book.model';
 
 @Component({
   selector: 'book-list',
-  standalone: true,
   imports: [CommonModule],
   template: `
-    <table *ngIf="books && books.length > 0">
-      <thead>
+    <div class="table-responsive">
+      <table *ngIf="books && books.length > 0" class="table table-striped table-hover align-middle shadow-sm">
+        <thead class="table-dark">
         <tr>
-          <th>Titre</th>
-          <th>Auteur</th>
-          <th>Catégorie</th>
-          <th>Disponible</th>
-          <th>Actions</th>
+          <th scope="col">Titre</th>
+          <th scope="col">Auteur</th>
+          <th scope="col">Catégorie</th>
+          <th scope="col">Disponible</th>
+          <th scope="col" class="text-center">Actions</th>
         </tr>
-      </thead>
-      <tbody>
+        </thead>
+
+        <tbody>
         <tr *ngFor="let book of books; trackBy: trackById">
-          <td>{{book.title}}</td>
-          <td>{{book.author}}</td>
-          <td>{{book.category}}</td>
-          <td>{{book.isAvailable ? 'Oui' : 'Non'}}</td>
-          <td class="actions">
-            <button (click)="onEdit(book)">Modifier</button>
-            <button (click)="onDelete(book.id)">Supprimer</button>
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.category }}</td>
+
+          <td>
+          <span
+            class="badge"
+            [class.bg-success]="book.isAvailable"
+            [class.bg-secondary]="!book.isAvailable"
+          >
+            {{ book.isAvailable ? 'Oui' : 'Non' }}
+          </span>
+          </td>
+
+          <td class="text-center">
+            <button
+              class="btn btn-sm btn-warning me-2"
+              (click)="onEdit(book)"
+            >
+              Modifier
+            </button>
+
+            <button
+              class="btn btn-sm btn-danger"
+              (click)="onDelete(book.id)"
+            >
+              Supprimer
+            </button>
           </td>
         </tr>
-      </tbody>
-    </table>
-    <div *ngIf="!books || books.length === 0">
-      Aucun livre.
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="!books || books.length === 0" class="alert alert-info mt-3 text-center">
+      Aucun livre pour le moment.
     </div>
   `
 })
