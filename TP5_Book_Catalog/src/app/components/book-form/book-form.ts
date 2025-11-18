@@ -14,39 +14,39 @@ import { Book } from '../../models/book.model';
       <input id="title" name="title" [(ngModel)]="model.title" #titleRef="ngModel"
              required minlength="3" pattern=".*[A-Za-z].*" />
       <div *ngIf="titleRef.invalid && titleRef.dirty">
-        <small *ngIf="titleRef.errors?.required">Le titre est requis.</small>
-        <small *ngIf="titleRef.errors?.minlength">Au moins 3 caractères.</small>
-        <small *ngIf="titleRef.errors?.pattern">Le titre ne doit pas être uniquement des chiffres.</small>
+        <small *ngIf="titleRef.errors?.['required']">Le titre est requis.</small>
+        <small *ngIf="titleRef.errors?.['minlength']">Au moins 3 caractères.</small>
+        <small *ngIf="titleRef.errors?.['pattern']">Le titre ne doit pas être uniquement des chiffres.</small>
       </div>
 
       <label for="author">Auteur</label>
       <input id="author" name="author" [(ngModel)]="model.author" #authorRef="ngModel"
              required minlength="3" />
       <div *ngIf="authorRef.invalid && authorRef.dirty">
-        <small *ngIf="authorRef.errors?.required">L'auteur est requis.</small>
-        <small *ngIf="authorRef.errors?.minlength">Au moins 3 caractères.</small>
+        <small *ngIf="authorRef.errors?.['required']">L'auteur est requis.</small>
+        <small *ngIf="authorRef.errors?.['minlength']">Au moins 3 caractères.</small>
       </div>
 
       <label for="publisherEmail">Email Editeur</label>
       <input id="publisherEmail" name="publisherEmail" type="email" [(ngModel)]="model.publisherEmail"
              #emailRef="ngModel" required />
       <div *ngIf="emailRef.invalid && emailRef.dirty">
-        <small *ngIf="emailRef.errors?.required">L'email est requis.</small>
-        <small *ngIf="emailRef.errors?.email">Email invalide.</small>
+        <small *ngIf="emailRef.errors?.['required']">L'email est requis.</small>
+        <small *ngIf="emailRef.errors?.['email']">Email invalide.</small>
       </div>
 
       <label for="publisherPhone">Téléphone (tunisie)</label>
       <input id="publisherPhone" name="publisherPhone" type="text" [(ngModel)]="model.publisherPhone"
              #phoneRef="ngModel" pattern="^[0-9]{8}$" />
       <div *ngIf="phoneRef.invalid && phoneRef.dirty">
-        <small *ngIf="phoneRef.errors?.pattern">Doit être exactement 8 chiffres.</small>
+        <small *ngIf="phoneRef.errors?.['pattern']">Doit être exactement 8 chiffres.</small>
       </div>
 
       <label for="releaseDate">Date de sortie</label>
       <input id="releaseDate" name="releaseDate" type="date" [(ngModel)]="model.releaseDate"
              #dateRef="ngModel" required (ngModelChange)="checkYear()" />
       <div *ngIf="dateRef.invalid && dateRef.dirty">
-        <small *ngIf="dateRef.errors?.required">La date est requise.</small>
+        <small *ngIf="dateRef.errors?.['required']">La date est requise.</small>
       </div>
       <div *ngIf="releaseYearInvalid">
         <small>Année doit être supérieure à 1900.</small>
@@ -68,7 +68,7 @@ import { Book } from '../../models/book.model';
       <label for="stock">Stock</label>
       <input id="stock" name="stock" type="number" [(ngModel)]="model.stock" #stockRef="ngModel" min="0" />
       <div *ngIf="stockRef.invalid && stockRef.dirty">
-        <small *ngIf="stockRef.errors?.min">Stock doit être >= 0.</small>
+        <small *ngIf="stockRef.errors?.['min']">Stock doit être >= 0.</small>
       </div>
 
       <div style="margin-top:12px;">
